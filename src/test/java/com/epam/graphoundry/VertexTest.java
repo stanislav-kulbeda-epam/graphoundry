@@ -46,7 +46,7 @@ public class VertexTest {
                 .build();
         assertEquals(0, from.getEdges().size());
 
-        Edge edge = Edge.create(from, to).withDirection().build();
+        Edge edge = Edge.create(from, to).directed().build();
 
         assertEquals(1, from.getEdges().size());
         assertEquals(edge, from.getEdges().getFirst());
@@ -64,11 +64,11 @@ public class VertexTest {
         assertEquals(0, start.getEdges().size());
 
         Edge edgeFw = Edge.create(start, finish)
-                .withDirection()
+                .directed()
                 .withWeight(() -> 1)
                 .build();
         Edge edgeBw = Edge.create(finish, start)
-                .withDirection()
+                .directed()
                 .withWeight(() -> 2)
                 .build();
 

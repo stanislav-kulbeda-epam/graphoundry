@@ -2,6 +2,7 @@ package com.epam.graphoundry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public abstract class AbstractVertex<V> implements Vertex<V> {
     private final V value;
@@ -18,7 +19,12 @@ public abstract class AbstractVertex<V> implements Vertex<V> {
     }
 
     @Override
-    public boolean addEdge(Edge edge) {
+    public boolean addEdge(Vertex<V> to, Supplier<Number> weightSupplier) {
+        return addEdge(to, weightSupplier, false);
+    }
+    @Override
+    public boolean addEdge(Vertex<V> to, Supplier<Number> weightSupplier, boolean directed) {
+        Edge edge = Edge.create(this, to).withWeight(weightSupplier).directed(directed).build();
         if(!this.graph.getVertices().contains(edge.getTo())) {
             this.graph.addVertex(edge.getTo());
         }

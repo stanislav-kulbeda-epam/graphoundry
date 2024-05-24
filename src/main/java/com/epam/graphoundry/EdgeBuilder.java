@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 public class EdgeBuilder {
     private final Vertex<?> from;
     private final Vertex<?> to;
-    private boolean directional;
+    private boolean directed;
     private Supplier<Number> weightSupplier;
 
     <V> EdgeBuilder(Vertex<V> from, Vertex<V> to) {
@@ -17,9 +17,13 @@ public class EdgeBuilder {
         return new EdgeBuilder(from, to);
     }
 
-    public EdgeBuilder withDirection() {
-        this.directional = true;
+    public EdgeBuilder directed(boolean directed) {
+        this.directed = directed;
         return this;
+    }
+
+    public EdgeBuilder directed() {
+        return directed(true);
     }
 
     public EdgeBuilder withWeight(Supplier<Number> weightSupplier) {
@@ -28,11 +32,6 @@ public class EdgeBuilder {
     }
 
     public Edge build() {
-        DefaultEdge edge = new DefaultEdge(from, to, directional, weightSupplier);
-        from.addEdge(edge);
-        if(!directional) {
-            to.addEdge(new DefaultEdge(to, from, false, weightSupplier));
-        }
-        return edge;
+        return new DefaultEdge(from, to, directed, weightSupplier);
     }
 }

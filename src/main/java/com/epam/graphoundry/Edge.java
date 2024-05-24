@@ -7,7 +7,7 @@ public interface Edge {
 
     Vertex<?> getTo();
 
-    boolean isDirectional();
+    boolean isDirected();
 
     Number getWeight();
 }

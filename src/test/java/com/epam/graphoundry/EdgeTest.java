@@ -14,12 +14,11 @@ public class EdgeTest {
         Vertex<String> vertex2 = VertexBuilder.<String>create(graph)
                 .withValue("2")
                 .build();
-        Edge edge = EdgeBuilder.create(vertex1, vertex2)
-                .withWeight(() -> 10)
-                .build();
+        vertex1.addEdge(vertex2, () -> 10);
+        Edge edge = vertex1.getEdges().getFirst();
         assertEquals(vertex1, edge.getFrom());
         assertEquals(vertex2, edge.getTo());
-        assertFalse(edge.isDirectional());
+        assertFalse(edge.isDirected());
         assertEquals(10, edge.getWeight());
     }
 
@@ -33,9 +32,9 @@ public class EdgeTest {
                 .withValue("2")
                 .build();
         Edge edge = EdgeBuilder.create(vertex1, vertex2)
-                .withDirection()
+                .directed()
                 .withWeight(() -> 10)
                 .build();
-        assertTrue(edge.isDirectional());
+        assertTrue(edge.isDirected());
     }
 }
