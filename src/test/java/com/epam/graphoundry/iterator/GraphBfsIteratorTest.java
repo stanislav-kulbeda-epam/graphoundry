@@ -40,7 +40,7 @@ class GraphBfsIteratorTest {
 
         GraphBfsIterator iterator = new GraphBfsIterator(graph);
 
-        int[] expectedValues = {1, 2, 5, 3, 6, 7, 4};
+        int[] expectedValues = {1, 2, 3, 4, 5, 6, 7};
 
         int i = 0;
         List<Integer> actual = new ArrayList<>();

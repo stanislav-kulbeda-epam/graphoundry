@@ -42,6 +42,7 @@ public abstract class AbstractEdge implements Edge {
 
     @Override
     public String toString() {
-        return "(" + from.toString() + ")" + (directional ? " -> " : " -- ") + "(" + to.toString() + ") : " + getWeight();
+        String connection = "-" + (weightSupplier == null ? "" : weightSupplier.get()) + (directional ? ">" : "-");
+        return "(" + from.toString() + ") " + connection + " (" + to.toString() + ")";
     }
 }
